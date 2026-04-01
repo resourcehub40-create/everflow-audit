@@ -113,8 +113,15 @@ Each audited page is scored on:
 ## Collaboration
 - **Dasha** — project lead, audit engine, report builder
 - **Ceno Pant** (`cp-everflow`) — design team, UX review, subtask creation for page cleanup
-- **Ticket:** DESGN board (Jira) — to be created
+- **Jira:** DESGN-3501 (Ceno assigned, Dasha watching). ITA-203 + ITA-212 (Done, linked).
 - **GitHub:** https://github.com/resourcehub40-create/everflow-audit
+
+## Guardrails & Safety
+- **No secrets in repo** — verified clean. No API keys, tokens, or credentials.
+- **No branch protection** — Ceno has push access to main. Intentional: static HTML + screenshots, no backend, no build pipeline, no secrets. Low risk.
+- **If something breaks:** Rebuild entire report with one command: `cd ~/Projects/Google\ Colab && python build_report.py` then redeploy. Audit JSON data is the source of truth, HTML is a build artifact.
+- **Do NOT commit secrets** — no Supabase service keys, no Jira tokens, no Google API keys. Only public-read Supabase URLs referenced.
+- **Vercel deploys may need retries** — persistent SSL upload errors on large batches. Retry `npx vercel deploy --prod --yes` until success (caches progress incrementally).
 
 ## Known Limitations
 - Cookie consent banners appear on many screenshots (covers hero content)
